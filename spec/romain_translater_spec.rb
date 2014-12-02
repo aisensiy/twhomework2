@@ -44,4 +44,26 @@ describe RomanTranslater do
       expect(translater.roman_to_decimal("MCMXLIV")).to be_eql 1944
     end
   end
+
+  context "invalid roman number detect" do
+    it "should return roman" do
+      translater = RomanTranslater.new
+      expect(translater.decimal_to_roman(1944)).to be_eql "MCMXLIV"
+      expect(translater.decimal_to_roman(2006)).to be_eql "MMVI"
+    end
+
+    it "should return nil if invalid char is included" do
+      translater = RomanTranslater.new
+      expect(translater.roman_to_decimal("K")).to be_eql nil
+      expect(translater.roman_to_decimal("KK")).to be_eql nil
+    end
+
+    it "should return nil if roman is invalid when translate to decimal" do
+      translater = RomanTranslater.new
+      expect(translater.roman_to_decimal("MMMM")).to be_eql nil
+      expect(translater.roman_to_decimal("XD")).to be_eql nil
+      expect(translater.roman_to_decimal("DD")).to be_eql nil
+      expect(translater.roman_to_decimal("XXMM")).to be_eql nil
+    end
+  end
 end
