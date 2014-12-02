@@ -93,4 +93,29 @@ describe InputProcessor do
       expect(processor.parse_query_rules(input)).to be_eql([nil])
     end
   end
+
+  it "should parse all" do
+    input = [
+      'glob is I',
+      'prok is V',
+      'pish is X',
+      'tegj is L',
+      'glob glob Silver is 34 Credits',
+      'glob prok Gold is 57800 Credits',
+      'pish pish Iron is 3910 Credits',
+      'how many Credits is glob prok Silver ?',
+      'how many Credits is glob prok Gold ?',
+      'how many Credits is glob prok Iron ?'
+    ]
+    processor = InputProcessor.new
+    expect(processor.parse(input)).to be_eql([
+      {'glob' => 'I', 'prok' => 'V', 'pish' => 'X', 'tegj' => 'L'},
+      [
+        ['glob glob Silver', 34],
+        ['glob prok Gold', 57800],
+        ['pish pish Iron', 3910]
+      ],
+      ['glob prok Silver', 'glob prok Gold', 'glob prok Iron']
+    ])
+  end
 end
