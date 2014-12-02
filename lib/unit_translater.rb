@@ -17,6 +17,7 @@ class UnitTranslater
   end
 
   def cal_metal_credit(metal)
+    return if metal.nil?
     words = metal.scan(/\w+/)
     if metal_unit_credit.keys.include? words[-1]
       roman = words[0...-1].map do |v|

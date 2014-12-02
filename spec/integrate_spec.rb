@@ -29,15 +29,11 @@ describe 'integrate test' do
 
     results = []
     queries.each do |query|
-      if query.nil?
+      result = translater.cal_metal_credit(query)
+      if result.nil?
         results << "I have no idea what you are talking about"
       else
-        result = translater.cal_metal_credit(query)
-        if result.nil?
-          results << "I have no idea what you are talking about"
-        else
-          results << "#{query} is #{result}"
-        end
+        results << "#{query} is #{result}"
       end
     end
     expect(results).to be_eql([
