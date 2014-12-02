@@ -19,15 +19,16 @@ describe 'integrate test' do
       'how much wood could a woodchuck chuck if a woodchuck could chuck wood ?'
     ]
     input_proc = InputProcessor.new
+    mapping_rules, metal_unit_rules, queries = input_proc.parse(input)
 
-    mapping_rules = input_proc.parse_intergalactic_map_rules(input)
     translater = UnitTranslater.new(mapping_rules)
-    input_proc.parse_metal_unit_rules(input).each do |rule|
+    metal_unit_rules.each do |rule|
       metal, credits = rule
       translater.unit_to_credit(metal, credits)
     end
+
     results = []
-    input_proc.parse_query_rules(input).each do |query|
+    queries.each do |query|
       if query.nil?
         results << "I have no idea what you are talking about"
       else
