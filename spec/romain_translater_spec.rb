@@ -34,9 +34,14 @@ describe RomanTranslater do
   end
 
   context "multi roman number to decimal" do
-    it "should replace roman number from large to small without substract" do
+    it "should sum roman number from large to small without substract" do
       translater = RomanTranslater.new
       expect(translater.roman_to_decimal("MMVI")).to be_eql 2006
+    end
+
+    it "should sum roman number from large to small with small one before large number" do
+      translater = RomanTranslater.new
+      expect(translater.roman_to_decimal("MCMXLIV")).to be_eql 1944
     end
   end
 end
