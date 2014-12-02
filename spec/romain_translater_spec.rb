@@ -32,4 +32,11 @@ describe RomanTranslater do
       expect(translater.roman_to_decimal("M")).to be_eql 1000
     end
   end
+
+  context "multi roman number to decimal" do
+    it "should replace roman number from large to small without substract" do
+      translater = RomanTranslater.new
+      expect(translater.roman_to_decimal("MMVI")).to be_eql 2006
+    end
+  end
 end
