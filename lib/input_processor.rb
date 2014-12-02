@@ -24,13 +24,18 @@ class InputProcessor
   end
 
   def parse_query_rules(input)
+    query_pn = /\?$/
     credit_query_pn = /^how many Credits is (?<unit>.+) \?$/
     numeral_query_pn = /^how much is (?<unit>.+) \?$/
     results = []
     input.each do |line|
-      match_result = credit_query_pn.match(line) || numeral_query_pn.match(line)
-      if !match_result.nil?
-        results << match_result[:unit]
+      if query_pn.match line
+        match_result = credit_query_pn.match(line) || numeral_query_pn.match(line)
+        if !match_result.nil?
+          results << match_result[:unit]
+        else
+          results << nil
+        end
       end
     end
     results

@@ -77,8 +77,7 @@ describe InputProcessor do
         'pish pish Iron is 3910 Credits',
         'how many Credits is glob prok Silver ?',
         'how many Credits is glob prok Gold ?',
-        'how many Credits is glob prok Iron ?',
-        'how much wood could a woodchuck chuck if a woodchuck could chuck wood ?'
+        'how many Credits is glob prok Iron ?'
       ]
       processor = InputProcessor.new
       expect(processor.parse_query_rules(input)).to be_eql([
@@ -86,6 +85,12 @@ describe InputProcessor do
         'glob prok Gold',
         'glob prok Iron'
       ])
+    end
+
+    it "should parse invalid query and return nil" do
+      input = ['how much wood could a woodchuck chuck if a woodchuck could chuck wood ?']
+      processor = InputProcessor.new
+      expect(processor.parse_query_rules(input)).to be_eql([nil])
     end
   end
 end
