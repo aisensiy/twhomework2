@@ -10,6 +10,12 @@ class RomanTranslater
   }
 
   def roman_to_decimal(roman)
-    @@map[roman]
+    if roman.size == 1
+      @@map[roman]
+    else
+      roman.scan(/\w/).map do |ch|
+        @@map[ch]
+      end.reduce(&:+)
+    end
   end
 end
