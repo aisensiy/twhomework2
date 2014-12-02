@@ -10,4 +10,16 @@ class InputProcessor
     end
     rules
   end
+
+  def parse_metal_unit_rules(input)
+    pn = /^(?<unit_metal>.+) is (?<num>\d+) Credits$/
+    results = []
+    input.each do |line|
+      match_result = pn.match(line)
+      if !match_result.nil?
+        results << [match_result[:unit_metal], match_result[:num].to_i]
+      end
+    end
+    results
+  end
 end
