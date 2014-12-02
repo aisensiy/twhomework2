@@ -1,4 +1,12 @@
 class InputProcessor
+  def parse(input)
+    [
+      parse_intergalactic_map_rules(input),
+      parse_metal_unit_rules(input),
+      parse_query_rules(input)
+    ]
+  end
+
   def parse_intergalactic_map_rules(input)
     pn = /^(?<intergalactic>\w+) is (?<roman>\w+)$/
     rules = {}
