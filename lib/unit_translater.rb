@@ -13,7 +13,7 @@ class UnitTranslater
     words = unit.scan(/\w+/)
     metal = words[-1]
     roman = words[0...-1].map { |v| @map[v] }.join()
-    @metal_unit_credit[metal] = credit / @roman_translater.roman_to_decimal(roman)
+    @metal_unit_credit[metal] = 1.0 * credit / @roman_translater.roman_to_decimal(roman)
   end
 
   def cal_metal_credit(metal)
@@ -26,7 +26,7 @@ class UnitTranslater
       decimal = @roman_translater.roman_to_decimal(roman)
       return nil if decimal.nil?
       credits = metal_unit_credit[words[-1]] * decimal
-      "#{credits} Credits"
+      "#{credits.to_i} Credits"
     else
       roman = words.map do |v|
         return if !@map.include?(v)
